@@ -21,7 +21,6 @@
 
 # === macOS 专属 ===
 .hammerspoon                         macos
-.config/karabiner/karabiner.json     macos
 
 # === AI 工具配置 ===
 .claude/CLAUDE.md
@@ -31,6 +30,4 @@
 bin/dotfiles-sync
 
 # === 应用配置 ===
-Library/Application Support/Code/User/settings.json      macos
-Library/Application Support/Cursor/User/settings.json    macos
 Library/Application Support/Trae CN/User/settings.json   macos

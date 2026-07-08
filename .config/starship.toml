@@ -6,10 +6,9 @@
 scan_timeout = 30
 
 format = """\
-$directory\
+in $directory\
 $git_branch\
 $git_status\
-$fill\
 $all\
 $cmd_duration\
 $line_break\
@@ -26,7 +25,6 @@ truncation_length = 3
 truncate_to_repo = true
 repo_root_style = "bold"
 style = "bold cyan"
-prefix = "in "
 truncation_symbol = "…/"
 
 # ── Git ──

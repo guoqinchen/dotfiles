@@ -33,3 +33,4 @@ bin/dotfiles-sync
 # === 应用配置 ===
 Library/Application Support/Code/User/settings.json      macos
 Library/Application Support/Cursor/User/settings.json    macos
+Library/Application Support/Trae CN/User/settings.json   macos

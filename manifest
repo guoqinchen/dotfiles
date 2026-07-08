@@ -1,0 +1,35 @@
+# dotfiles manifest — <repo-relative-path> [macos|linux]
+# 部署目标路径 = $HOME/<repo-relative-path>
+
+# === Shell 配置（ZDOTDIR 模式） ===
+.zshenv
+.config/zsh/.zshrc
+.config/zsh/.zprofile
+.config/zsh/macos.zsh              macos
+.config/zsh/linux.zsh              linux
+
+# === Git 配置（不含 user.name/email） ===
+.gitconfig
+.config/git/ignore
+
+# === 终端配置 ===
+.tmux.conf
+
+# === CLI 工具配置 ===
+.config/mise/config.toml
+.config/starship.toml
+
+# === macOS 专属 ===
+.hammerspoon                         macos
+.config/karabiner/karabiner.json     macos
+
+# === AI 工具配置 ===
+.claude/CLAUDE.md
+.codex/AGENTS.md
+
+# === 脚本 ===
+bin/dotfiles-sync
+
+# === 应用配置 ===
+Library/Application Support/Code/User/settings.json      macos
+Library/Application Support/Cursor/User/settings.json    macos

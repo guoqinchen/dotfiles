@@ -1,0 +1,33 @@
+#!/bin/bash
+# dotfiles-sync — 一键同步 dotfiles 状态
+# 用法: dotfiles-sync [message]
+# 作用: 检查 homedir-manager 状态 + 提交 + 推送
+
+set -eu
+
+echo "==> 检查 dotfiles 状态..."
+cd ~/git/dotfiles
+
+# 检查 git 状态
+if [[ -n $(git status --porcelain) ]]; then
+  echo "==> 有未提交的变更:"
+  git status --short
+  echo ""
+  echo "是否提交并推送? [y/N] "
+  read -r confirm
+  if [[ "$confirm" =~ ^[Yy]$ ]]; then
+    git add -A
+    git commit -m "sync: ${1:-dotfiles 同步 $(date +%Y-%m-%d)}"
+    git push
+    echo "==> 已提交并推送"
+  else
+    echo "==> 跳过提交"
+  fi
+else
+  echo "==> 没有未提交的变更"
+fi
+
+# 检查 homedir-manager audit
+echo ""
+echo "==> 运行 homedir-manager audit..."
+homedir-manager audit && echo "==> audit 通过" || echo "==> audit 发现问题"

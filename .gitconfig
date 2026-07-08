@@ -1,0 +1,57 @@
+# .gitconfig — 通用 git 配置
+# user.name 和 user.email 在 ~/.gitconfig.local 中设置（不入仓）
+
+[rebase]
+  autostash = true
+
+[merge]
+  ff = only
+  conflictstyle = zdiff3
+
+[alias]
+  co = checkout
+  br = branch
+  ci = commit
+  st = status
+  prune = fetch --prune
+  undo = reset --soft HEAD^
+  stash-all = stash save --include-untracked
+  glog = log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset'
+  up = !"git switch $(git head-branch) && git fetch --all --prune --progress && git pull"
+  head-branch = !"git remote show origin | grep 'HEAD branch' | cut -d' ' -f5"
+
+[push]
+  default = current
+  followTags = false
+
+[pull]
+  rebase = true
+
+[status]
+  showUntrackedFiles = all
+
+[diff]
+  algorithm = histogram
+  colorMoved = default
+  colorMovedWS = allow-indentation-change
+
+[init]
+  defaultBranch = main
+
+[format]
+  signOff = true
+
+[rerere]
+  enabled = true
+
+[color]
+  ui = true
+
+[core]
+  excludesfile = ~/.gitignore_global
+
+[advice]
+  detachedHead = false
+
+[includeIf "gitdir:~/dotfiles/"]
+  path = ~/.gitconfig-local

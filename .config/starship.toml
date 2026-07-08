@@ -1,0 +1,48 @@
+# starship 提示符配置
+format = """
+[](#9A348E)\
+$os\
+$directory\
+$git_branch\
+$git_status\
+$nodejs\
+$rust\
+$golang\
+$python\
+$cmd_duration\
+$line_break\
+$character"""
+
+[directory]
+truncation_length = 3
+truncate_to_repo = true
+
+[git_branch]
+format = "on [$branch]($style) "
+symbol = ""
+
+[git_status]
+conflicted = "conflicted"
+ahead = "ahead ${count}"
+behind = "behind ${count}"
+diverged = "diverged ahead ${ahead_count} behind ${behind_count}"
+
+[nodejs]
+format = "via [⬢ $version](bold green) "
+
+[rust]
+format = "via [rust $version](bold red) "
+
+[golang]
+format = "via [go $version](bold cyan) "
+
+[python]
+format = "via [py $version](bold yellow) "
+
+[cmd_duration]
+min_time = 2000
+show_milliseconds = false
+
+[character]
+success_symbol = "[❯](bold green)"
+error_symbol = "[❯](bold red)"

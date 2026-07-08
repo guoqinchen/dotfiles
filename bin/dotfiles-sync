@@ -25,10 +25,11 @@ if [[ -n $(git status --porcelain) ]]; then
   echo "是否提交并推送? [y/N] "
   read -r confirm
   if [[ "$confirm" =~ ^[Yy]$ ]]; then
-    git add -A
-    git commit -m "sync: ${1:-dotfiles 同步 $(date +%Y-%m-%d)}"
-    git push
-    echo "==> 已提交并推送"
+    # 只添加 manifest 中的文件和已跟踪文件的修改
+    # 避免 git add -A 误添敏感文件
+    git add --update
+    echo "==> 提交并推送..."
+    git commit -m "sync: ${1:-dotfiles 同步 $(date +%Y-%m-%d)}" && git push && echo "==> 已完成" || echo "==> 推送失败"
   else
     echo "==> 跳过提交"
   fi

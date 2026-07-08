@@ -16,9 +16,9 @@ HISTSIZE=10000
 SAVEHIST=5000
 HISTFILE="$HOME/.zsh_history"
 
-# 补全
+# 补全（-C 使用缓存加速，-u 跳过安全检查）
 autoload -Uz compinit
-compinit -u
+compinit -C -u
 zstyle ':completion:*' menu select
 zstyle ':completion:*' matcher-list 'm:{a-z}={A-Z}'
 zstyle ':completion:*' list-colors "${(s.:.)LS_COLORS}"
@@ -28,10 +28,11 @@ if [ -x /opt/homebrew/bin/brew ]; then
   eval "$(/opt/homebrew/bin/brew shellenv)"
 fi
 
-# fnm (Node 版本管理)
-FNM_PATH="/opt/homebrew/opt/fnm/bin"
-if [ -d "$FNM_PATH" ]; then
-  eval "$(fnm env --shell zsh)"
+# Node 版本管理
+# 注意: fnm（Homebrew 安装）+ mise 同时管理 Node 版本可能冲突。
+# 项目级版本在 .node-version 中指定，全局兜底在 mise 配置中。
+if [ -d /opt/homebrew/opt/fnm/bin ]; then
+  eval "$(/opt/homebrew/opt/fnm/bin/fnm env --shell zsh)"
 fi
 
 # mise (工具版本管理)
@@ -44,8 +45,13 @@ if command -v starship &>/dev/null; then
   eval "$(starship init zsh)"
 fi
 
-# fzf
-[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+# fzf — 同时支持 Homebrew 安装和手动 install 脚本
+if [ -f ~/.fzf.zsh ]; then
+  source ~/.fzf.zsh
+elif [ -f /opt/homebrew/opt/fzf/shell/completion.zsh ]; then
+  source /opt/homebrew/opt/fzf/shell/completion.zsh
+  source /opt/homebrew/opt/fzf/shell/key-bindings.zsh
+fi
 
 # bat 作为 man 和 help 的 pager
 export MANPAGER="sh -c 'col -bx | bat -l man -p'"

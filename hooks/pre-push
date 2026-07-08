@@ -1,0 +1,10 @@
+#!/bin/bash
+# pre-push hook — 推送前自动运行安全审计
+homedir-manager audit --secrets 2>/dev/null || {
+  echo ""
+  echo "=============================================="
+  echo " 安全审计未通过，推送被阻止"
+  echo " 请先检查密钥泄漏问题: homedir-manager audit --secrets"
+  echo "=============================================="
+  exit 1
+}

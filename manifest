@@ -29,5 +29,11 @@
 # === 脚本 ===
 bin/dotfiles-sync
 
+# === Git 钩子 ===
+hooks/pre-push
+
+# === 测试 ===
+test/basic-smoke.sh
+
 # === 应用配置 ===
 Library/Application Support/Trae CN/User/settings.json   macos

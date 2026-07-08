@@ -4,6 +4,8 @@
 # ============================================================================
 
 # 选项
+# 注意: extended_glob 启用后,# 在命令参数中会被当作通配符
+# 注释请写在命令上方而不是行尾(如: git push # 注释 → zsh: bad pattern)
 setopt auto_cd extended_glob complete_in_word
 setopt no_beep no_hist_beep no_list_beep
 setopt hist_ignore_all_dups hist_reduce_blanks
@@ -22,7 +24,9 @@ zstyle ':completion:*' matcher-list 'm:{a-z}={A-Z}'
 zstyle ':completion:*' list-colors "${(s.:.)LS_COLORS}"
 
 # Homebrew
-eval "$(/opt/homebrew/bin/brew shellenv)"
+if [ -x /opt/homebrew/bin/brew ]; then
+  eval "$(/opt/homebrew/bin/brew shellenv)"
+fi
 
 # fnm (Node 版本管理)
 FNM_PATH="/opt/homebrew/opt/fnm/bin"
@@ -61,7 +65,7 @@ alias gbr='git branch'
 alias tma='tmux attach -t'
 alias tml='tmux list-sessions'
 alias tmn='tmux new -s'
-alias cat='bat'
+alias cat='bat -p'
 
 # 编辑器
 export EDITOR=nvim

@@ -1,9 +1,8 @@
-.gitconfig.local
+.gitconfig-local
 .zshrc.local
 .env
 .env.*
 *.pem
 *.key
 __pycache__/
-.gitconfig-local
 .DS_Store

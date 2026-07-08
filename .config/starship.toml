@@ -1,6 +1,6 @@
 # starship 提示符配置
-format = """
-[](#9A348E)\
+
+format = """\
 $os\
 $directory\
 $git_branch\

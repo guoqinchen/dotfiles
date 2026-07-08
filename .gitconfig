@@ -18,7 +18,7 @@
   stash-all = stash save --include-untracked
   glog = log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset'
   up = !"git switch $(git head-branch) && git fetch --all --prune --progress && git pull"
-  head-branch = !"git remote show origin | grep 'HEAD branch' | cut -d' ' -f5"
+  head-branch = !"git symbolic-ref refs/remotes/origin/HEAD | sed 's|^refs/remotes/origin/||'"
 
 [push]
   default = current
@@ -48,10 +48,15 @@
   ui = true
 
 [core]
-  excludesfile = ~/.gitignore_global
+  excludesfile = ~/.config/git/ignore
+  pager = diff-so-fancy | less --tabs=4 -RFX
 
 [advice]
   detachedHead = false
 
-[includeIf "gitdir:~/dotfiles/"]
+# 本地用户身份/凭据覆盖（~/.gitconfig-local 不入仓）
+[include]
   path = ~/.gitconfig-local
+
+[interactive]
+  diffFilter = diff-so-fancy --color-only

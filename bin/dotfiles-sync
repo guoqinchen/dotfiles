@@ -8,6 +8,15 @@ set -eu
 echo "==> 检查 dotfiles 状态..."
 cd ~/git/dotfiles
 
+# 先运行安全审计
+if command -v homedir-manager &>/dev/null; then
+  echo "==> 运行安全审计..."
+  homedir-manager audit --secrets || {
+    echo "==> 安全审计未通过! 请检查是否有密钥泄漏风险。"
+    exit 1
+  }
+fi
+
 # 检查 git 状态
 if [[ -n $(git status --porcelain) ]]; then
   echo "==> 有未提交的变更:"
@@ -26,8 +35,3 @@ if [[ -n $(git status --porcelain) ]]; then
 else
   echo "==> 没有未提交的变更"
 fi
-
-# 检查 homedir-manager audit
-echo ""
-echo "==> 运行 homedir-manager audit..."
-homedir-manager audit && echo "==> audit 通过" || echo "==> audit 发现问题"

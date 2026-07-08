@@ -2,7 +2,9 @@
 # 仅放置所有 shell 类型都需要的 PATH 设置
 
 # ZDOTDIR — 引导 zsh 到 .config/zsh 找 .zshrc
-export ZDOTDIR="$HOME/.config/zsh"
+if [ -d "$HOME/.config/zsh" ]; then
+  export ZDOTDIR="$HOME/.config/zsh"
+fi
 
 # Homebrew (Apple Silicon)
 if [ -d /opt/homebrew/bin ]; then
@@ -14,4 +16,12 @@ if [ -d "$HOME/.local/bin" ]; then
   path=("$HOME/.local/bin" $path)
 fi
 
-export PATH="$PATH"
+# Home bin
+if [ -d "$HOME/bin" ]; then
+  path=("$HOME/bin" $path)
+fi
+
+# Go bin
+if [ -d "$HOME/go/bin" ]; then
+  path=("$HOME/go/bin" $path)
+fi

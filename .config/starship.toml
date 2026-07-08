@@ -1,48 +1,117 @@
 # starship 提示符配置
+# 优化原则：只显示当前上下文相关的信息，无关模块自动隐藏
+# 性能：设置 scan_timeout 避免大目录下卡 prompt
+
+# 全局超时 — 目录扫描超过 30ms 跳过（防止 homebrew 等大目录卡顿）
+scan_timeout = 30
 
 format = """\
-$os\
 $directory\
 $git_branch\
 $git_status\
-$nodejs\
-$rust\
-$golang\
-$python\
+$fill\
+$all\
 $cmd_duration\
 $line_break\
 $character"""
 
+right_format = """\
+$shlvl\
+$jobs\
+"""
+
+# ── 目录 ──
 [directory]
 truncation_length = 3
 truncate_to_repo = true
+repo_root_style = "bold"
+style = "bold cyan"
+prefix = "in "
+truncation_symbol = "…/"
 
+# ── Git ──
 [git_branch]
-format = "on [$branch]($style) "
+format = " [$symbol$branch]($style) "
+style = "bold purple"
 symbol = ""
 
 [git_status]
-conflicted = "conflicted"
-ahead = "ahead ${count}"
-behind = "behind ${count}"
-diverged = "diverged ahead ${ahead_count} behind ${behind_count}"
+format = '[$all_status$ahead_behind]($style) '
+style = "bold yellow"
+conflicted = "🏳"
+ahead = "⇡${count}"
+behind = "⇣${count}"
+diverged = "⇕⇡${ahead_count}⇣${behind_count}"
+staged = "●${count}"
+modified = "✚${count}"
+stashed = "⚑${count}"
+deleted = "✗${count}"
+renamed = "➜${count}"
+untracked = "…${count}"
+
+# ── 语言运行时（仅当目录有相关文件时才显示）──
 
 [nodejs]
 format = "via [⬢ $version](bold green) "
+detect_files = ["package.json", ".node-version", "node_modules"]
+detect_folders = ["node_modules"]
+style = "bold green"
 
 [rust]
-format = "via [rust $version](bold red) "
+format = "via [🦀 $version](bold red) "
+detect_files = ["Cargo.toml", "Cargo.lock"]
+detect_folders = ["src"]
+style = "bold red"
 
 [golang]
-format = "via [go $version](bold cyan) "
+format = "via [🐹 $version](bold cyan) "
+detect_files = ["go.mod", "go.sum", "Gopkg.toml"]
+detect_folders = ["Godeps"]
+style = "bold cyan"
 
 [python]
-format = "via [py $version](bold yellow) "
+format = "via [🐍 $version](bold yellow) "
+detect_files = ["requirements.txt", "pyproject.toml", "Pipfile", "setup.py", "main.py"]
+detect_folders = [".venv", "venv"]
+style = "bold yellow"
+python_binary = "python3"
 
+# ── 命令耗时 ──
 [cmd_duration]
-min_time = 2000
+min_time = 2000  # 超过 2 秒才显示
 show_milliseconds = false
+format = "⏱️ [$duration]($style) "
+style = "bold yellow"
 
+# ── 提示符 ──
 [character]
 success_symbol = "[❯](bold green)"
 error_symbol = "[❯](bold red)"
+
+# ── 右侧提示符 ──
+
+[shlvl]
+disabled = false
+threshold = 2  # 嵌套层数 ≥ 2 才显示
+format = " [$symbol $shlvl]($style) "
+symbol = "🔄"
+style = "bold yellow"
+
+[jobs]
+disabled = false
+threshold = 1
+symbol = " ⚙"
+style = "bold blue"
+
+# ── 禁用不必要的默认模块 ──
+[package]
+disabled = true
+
+[hostname]
+disabled = true
+
+[os]
+disabled = true
+
+[shell]
+disabled = true

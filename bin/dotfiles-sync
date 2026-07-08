@@ -38,10 +38,12 @@ if [[ -n $(git status --porcelain) ]]; then
   if [[ "$confirm" =~ ^[Yy]$ ]]; then
     # 1. 暂存已跟踪文件的修改（安全）
     git add --update
-    # 2. 暂存 manifest 中列出的新文件（manifest 是手写白名单，安全）
+    # 2. 暂存 manifest 中列出的新文件/目录（manifest 是手写白名单，安全）
     while IFS= read -r line; do
       file=$(echo "$line" | awk '{print $1}')
-      [ -n "$file" ] && [ -f "$file" ] && git add "$file" 2>/dev/null || true
+      if [ -n "$file" ] && [ -e "$file" ]; then
+        git add "$file" 2>/dev/null || true
+      fi
     done < <(grep -v '^#' manifest | grep -v '^$' | grep -v '^merge-children')
     echo "==> 提交并推送..."
     git commit -m "sync: ${1:-dotfiles 同步 $(date +%Y-%m-%d)}" && git push && echo "==> 已完成" || echo "==> 推送失败"

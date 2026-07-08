@@ -1,5 +1,5 @@
 # .gitconfig — 通用 git 配置
-# user.name 和 user.email 在 ~/.gitconfig.local 中设置（不入仓）
+# user.name 和 user.email 在 ~/.gitconfig-local 中设置（不入仓）
 
 [rebase]
   autostash = true
@@ -17,7 +17,8 @@
   undo = reset --soft HEAD^
   stash-all = stash save --include-untracked
   glog = log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset'
-  up = !"git switch $(git head-branch) && git fetch --all --prune --progress && git pull"
+  # up: 切换到主分支 → 拉取更新。自动 stash 脏工作区。
+  up = !"git stash push -m 'auto-stash-for-up' 2>/dev/null || true && git switch $(git head-branch) 2>/dev/null || git checkout $(git head-branch) && git fetch --prune --progress origin && git pull && git stash pop 2>/dev/null || true"
   head-branch = !"git symbolic-ref refs/remotes/origin/HEAD | sed 's|^refs/remotes/origin/||'"
 
 [push]
@@ -49,7 +50,9 @@
 
 [core]
   excludesfile = ~/.config/git/ignore
-  pager = diff-so-fancy | less --tabs=4 -RFX
+  # pager 留空，优先用 git 内置分页。
+  # 如需 diff-so-fancy: brew install diff-so-fancy 后取消下面注释。
+  # pager = diff-so-fancy | less --tabs=4 -RFX
 
 [advice]
   detachedHead = false
@@ -58,5 +61,6 @@
 [include]
   path = ~/.gitconfig-local
 
-[interactive]
-  diffFilter = diff-so-fancy --color-only
+# 除注释方式启用 diff-so-fancy（不依赖 brew 安装顺序）
+# [interactive]
+#   diffFilter = diff-so-fancy --color-only

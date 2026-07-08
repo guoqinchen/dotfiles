@@ -29,10 +29,11 @@ if [ -x /opt/homebrew/bin/brew ]; then
 fi
 
 # Node 版本管理
-# 注意: fnm（Homebrew 安装）+ mise 同时管理 Node 版本可能冲突。
-# 项目级版本在 .node-version 中指定，全局兜底在 mise 配置中。
-if [ -d /opt/homebrew/opt/fnm/bin ]; then
-  eval "$(/opt/homebrew/opt/fnm/bin/fnm env --shell zsh)"
+# 注意: fnm + mise 同时存在时，mise 后激活，其 Node 版本覆盖 fnm。
+# 建议只用一个。当前以 mise 为准（fnm 兼容保留）。
+fnm_env_path="/opt/homebrew/opt/fnm/bin/fnm"
+if [ -x "$fnm_env_path" ]; then
+  eval "$("$fnm_env_path" env --shell zsh --corepack-enabled 2>/dev/null)"
 fi
 
 # mise (工具版本管理)
@@ -53,9 +54,12 @@ elif [ -f /opt/homebrew/opt/fzf/shell/completion.zsh ]; then
   [ -f /opt/homebrew/opt/fzf/shell/key-bindings.zsh ] && source /opt/homebrew/opt/fzf/shell/key-bindings.zsh
 fi
 
-# bat 作为 man 和 help 的 pager
-export MANPAGER="sh -c 'col -bx | bat -l man -p'"
-export BAT_THEME="Dracula"
+# bat — 作为 cat 和 man 的增强替代，命令不存在时回退
+if command -v bat &>/dev/null; then
+  alias cat='bat -p'
+  export MANPAGER="sh -c 'col -bx | bat -l man -p'"
+  export BAT_THEME="Dracula"
+fi
 
 # 别名
 alias ll='ls -lah'
@@ -71,11 +75,15 @@ alias gbr='git branch'
 alias tma='tmux attach -t'
 alias tml='tmux list-sessions'
 alias tmn='tmux new -s'
-alias cat='bat -p'
 
-# 编辑器
-export EDITOR=nvim
-export VISUAL=nvim
+# 编辑器（优先 nvim → vim → vi，确保 git commit 始终可用）
+for editor_candidate in nvim vim vi; do
+  if command -v "$editor_candidate" &>/dev/null; then
+    export EDITOR="$editor_candidate"
+    export VISUAL="$editor_candidate"
+    break
+  fi
+done
 
 # 本地覆盖（不入仓）
 [ -f ~/.zshrc.local ] && source ~/.zshrc.local

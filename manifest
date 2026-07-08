@@ -29,9 +29,6 @@
 # === 脚本 ===
 bin/dotfiles-sync
 
-# === Git 钩子 ===
-hooks/pre-push
-
 # === 测试 ===
 test/basic-smoke.sh
 

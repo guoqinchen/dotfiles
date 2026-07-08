@@ -8,6 +8,17 @@ set -eu
 echo "==> 检查 dotfiles 状态..."
 cd ~/git/dotfiles
 
+# 确保 git hooks 已安装（.git/hooks/ 无法通过 symlink 管理）
+HOOK_SRC="hooks/pre-push"
+HOOK_DST=".git/hooks/pre-push"
+if [ -f "$HOOK_SRC" ]; then
+  if [ ! -f "$HOOK_DST" ] || ! diff -q "$HOOK_SRC" "$HOOK_DST" >/dev/null 2>&1; then
+    cp "$HOOK_SRC" "$HOOK_DST"
+    chmod +x "$HOOK_DST"
+    echo "==> 已安装 pre-push hook"
+  fi
+fi
+
 # 先运行安全审计
 if command -v homedir-manager &>/dev/null; then
   echo "==> 运行安全审计..."
@@ -25,9 +36,13 @@ if [[ -n $(git status --porcelain) ]]; then
   echo "是否提交并推送? [y/N] "
   read -r confirm
   if [[ "$confirm" =~ ^[Yy]$ ]]; then
-    # 只添加 manifest 中的文件和已跟踪文件的修改
-    # 避免 git add -A 误添敏感文件
+    # 1. 暂存已跟踪文件的修改（安全）
     git add --update
+    # 2. 暂存 manifest 中列出的新文件（manifest 是手写白名单，安全）
+    while IFS= read -r line; do
+      file=$(echo "$line" | awk '{print $1}')
+      [ -n "$file" ] && [ -f "$file" ] && git add "$file" 2>/dev/null || true
+    done < <(grep -v '^#' manifest | grep -v '^$' | grep -v '^merge-children')
     echo "==> 提交并推送..."
     git commit -m "sync: ${1:-dotfiles 同步 $(date +%Y-%m-%d)}" && git push && echo "==> 已完成" || echo "==> 推送失败"
   else

@@ -50,7 +50,7 @@ if [ -f ~/.fzf.zsh ]; then
   source ~/.fzf.zsh
 elif [ -f /opt/homebrew/opt/fzf/shell/completion.zsh ]; then
   source /opt/homebrew/opt/fzf/shell/completion.zsh
-  source /opt/homebrew/opt/fzf/shell/key-bindings.zsh
+  [ -f /opt/homebrew/opt/fzf/shell/key-bindings.zsh ] && source /opt/homebrew/opt/fzf/shell/key-bindings.zsh
 fi
 
 # bat 作为 man 和 help 的 pager

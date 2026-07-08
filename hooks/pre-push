@@ -1,5 +1,8 @@
 #!/bin/bash
 # pre-push hook — 推送前自动运行安全审计
+# 注意: .git/hooks/ 无法通过 symlink 管理。
+# 运行 dotfiles-sync 自动安装此钩子，或手动: cp hooks/pre-push .git/hooks/ && chmod +x .git/hooks/pre-push
+
 homedir-manager audit --secrets 2>/dev/null || {
   echo ""
   echo "=============================================="

@@ -3,8 +3,8 @@
 
 # .zshenv 设置的 ZDOTDIR 已确保找到正确的 .zshrc
 
-# Python pip 用户安装路径（自动检测版本）
-for pyver_path in "$HOME"/Library/Python/*/bin; do
+# Python pip 用户安装路径（自动检测版本，N 允许目录为空）
+for pyver_path in "$HOME"/Library/Python/*/bin(N); do
   if [ -d "$pyver_path" ]; then
     path=("$pyver_path" $path)
   fi

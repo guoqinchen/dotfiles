@@ -21,6 +21,6 @@
 - Shell: zsh (ZDOTDIR=~/.config/zsh)
 - 编辑器: Trae IDE
 - 工具管理: mise, fnox, Homebrew
-- Node: fnm + mise 共同管理
+- Node: mise 管理
 - Go: mise 管理
-- Rust: mise 管理
+- Rust: rustup 管理

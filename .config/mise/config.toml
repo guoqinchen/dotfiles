@@ -1,6 +1,5 @@
 [tools]
 go = "latest"
-rust = "latest"
 node = "lts"
 python = "latest"
 fnox = "latest"

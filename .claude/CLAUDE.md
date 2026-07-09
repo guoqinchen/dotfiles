@@ -20,7 +20,7 @@
 - Shell: zsh (ZDOTDIR=~/.config/zsh)
 - 包管理: Homebrew (Apple Silicon arm64)
 - Node 管理: mise（项目级 `.mise.toml` / 全局 `mise config`）
-- 工具版本: mise 管理
+- 工具版本: mise 管理（Go/Node/Python/fnox）；Rust 由 rustup 管理
 - 密钥管理: fnox
 - macOS
 

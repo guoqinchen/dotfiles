@@ -93,6 +93,7 @@ graph TB
 | **密钥管理** | fnox 按需加载密钥，`audit --secrets` 防泄漏 | 系统级 `~/.config/fnox/config.toml` |
 | **安全推送** | pre-push hook 自动审计密钥后阻止危险推送 | `hooks/pre-push` |
 | **终端增强** | tmux + starship + fzf + bat 一体化体验 | `.tmux.conf`, `.config/starship.toml` |
+| **容器环境** | Docker 29 + Docker Compose 5（Colima + Lima VM） | `.colima/default/colima.yaml` |
 | **AI 集成** | Claude Code / Codex CLI 感知开发环境 | `.claude/CLAUDE.md`, `.codex/AGENTS.md` |
 | **一键同步** | `dotfiles-sync` 完成审计、提交、推送 | `bin/dotfiles-sync` |
 | **部署验证** | `test/basic-smoke.sh` 烟雾测试 | `test/basic-smoke.sh` |
@@ -100,7 +101,7 @@ graph TB
 
 ### 3.2 托管配置清单
 
-共 **16 项**配置通过 `manifest` 管理（截止 v1.0.0）：
+共 **17 项**配置通过 `manifest` 管理（截止 v1.0.0）：
 
 **Shell 层 (5 项)**
 | 部署路径 | 说明 |
@@ -122,11 +123,12 @@ graph TB
 |---------|------|
 | `~/.tmux.conf` | tmux 配置（Ctrl-b 前缀 + 系统剪贴板） |
 
-**CLI 工具层 (2 项)**
+**CLI 工具层 (3 项)**
 | 部署路径 | 说明 |
 |---------|------|
 | `~/.config/mise/config.toml` | 工具版本声明 |
 | `~/.config/starship.toml` | 交互式提示符 |
+| `~/.colima/default/colima.yaml` | Colima 容器 VM 配置 |
 
 **AI 层 (2 项)**
 | 部署路径 | 说明 |

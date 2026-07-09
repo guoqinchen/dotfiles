@@ -5,7 +5,7 @@
     "codeReview.autoJumpToNextChange": true,
     "AI.toolcall.v2.fileOp.mode": "alwaysRun",
     "AI.rules.importClaudeMd": true,
-    "AI.toolcall.v2.command.allowList": "[\"date\",\"mkdir\",\"cp\",\"echo\",\"ls\",\"head\",\"git\",\"cd\",\"./bootstrap\",\"cat\",\"chmod\",\"eval\",\"mise\",\"ssh-keygen\",\"ssh-agent\",\"ssh-add\",\"ssh\",\"true\",\"homedir-manager\",\"which\",\"sed\",\"grep\",\"rm\",\"du\",\"npm\",\"node\"]",
+    "AI.toolcall.v2.command.allowList": "[\"date\",\"mkdir\",\"cp\",\"echo\",\"ls\",\"head\",\"git\",\"cd\",\"./bootstrap\",\"cat\",\"chmod\",\"eval\",\"mise\",\"ssh-keygen\",\"ssh-agent\",\"ssh-add\",\"ssh\",\"true\",\"homedir-manager\",\"which\",\"sed\",\"grep\",\"rm\",\"du\",\"npm\",\"node\",\"ln\",\"mv\",\"rmdir\"]",
     "git.openRepositoryInParentFolders": "never",
     "terminal.integrated.sendKeybindingsToShell": true
 }

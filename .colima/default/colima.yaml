@@ -1,0 +1,9 @@
+# Colima 默认配置文件
+# 当执行 `colima start` 不传参数时使用此配置
+# 完整选项: colima start --help
+
+vm-type: vz
+mount-type: virtiofs
+cpu: 2
+memory: 4
+disk: 60

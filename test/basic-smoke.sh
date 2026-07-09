@@ -74,6 +74,26 @@ else
 fi
 
 echo ""
+echo "--- 容器 ---"
+if command -v docker &>/dev/null; then
+  dver=$(docker --version 2>&1 | sed 's/Docker version //')
+  echo "  ✅ PASS: Docker $dver"
+  PASS=$((PASS + 1))
+else
+  echo "  ⚠️  SKIP: Docker 未安装"
+  PASS=$((PASS + 1))
+fi
+
+if docker compose version &>/dev/null; then
+  cver=$(docker compose version 2>&1 | sed 's/Docker Compose version //')
+  echo "  ✅ PASS: Docker Compose $cver"
+  PASS=$((PASS + 1))
+else
+  echo "  ⚠️  SKIP: Docker Compose 未安装"
+  PASS=$((PASS + 1))
+fi
+
+echo ""
 echo "========================================="
 echo " 结果: $PASS 通过 / $FAIL 失败"
 echo "========================================="

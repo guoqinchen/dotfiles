@@ -26,3 +26,4 @@
 - Rust: rustup 管理
 - Java: mise 管理（Adoptium JDK 21 LTS）
 - Maven: mise 管理（最新稳定版）
+- Docker: Colima + Docker CLI 29 + Docker Compose 5（brew 安装）

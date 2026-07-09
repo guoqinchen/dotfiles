@@ -18,6 +18,7 @@
 # === CLI 工具配置 ===
 .config/mise/config.toml
 .config/starship.toml
+.colima/default/colima.yaml
 
 # === macOS 专属 ===
 .hammerspoon                         macos

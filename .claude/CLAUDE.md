@@ -23,6 +23,7 @@
 - 工具版本: mise 管理（Go/Node/Python/fnox/Java/Maven）；Rust 由 rustup 管理
 - Java: Adoptium JDK 21 LTS（mise java 插件）
 - 构建工具: Maven 3.9.x（mise maven 插件，自动识别 mise java）
+- 容器: Docker 29 + Docker Compose 5（Colima 0.10 + Lima VM on Apple Silicon）
 - 密钥管理: fnox
 - macOS
 

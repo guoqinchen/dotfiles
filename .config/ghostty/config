@@ -1,0 +1,33 @@
+# =============================================================================
+# Ghostty 配置文件
+# 路径: ~/.config/ghostty/config
+# 完整选项: ghostty +list-config --help 或 https://ghostty.org/docs/configuration
+# 可用主题: ghostty +list-themes
+# =============================================================================
+
+# --- 字体 ---
+font-family = JetBrains Mono
+font-size = 14
+
+# --- 主题 ---
+theme = iTerm2 Default
+
+# --- 窗口 ---
+# 窗口装饰风格 (auto, system, tabs, none, macos)
+macos-titlebar-style = tabs
+# 不透明背景 (0.0 ~ 1.0)
+background-opacity = 1.0
+
+# --- 快捷键 ---
+# Ctrl-Shift-T: 新建标签页
+# Cmd-D: 垂直分屏
+# Cmd-Shift-D: 水平分屏
+
+# --- 行为 ---
+copy-on-select = clipboard
+confirm-close-surface = false
+mouse-hide-while-typing = true
+
+# --- 光标 ---
+cursor-style = bar
+cursor-style-blink = true

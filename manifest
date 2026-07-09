@@ -14,6 +14,7 @@
 
 # === 终端配置 ===
 .tmux.conf
+.config/ghostty/config
 
 # === CLI 工具配置 ===
 .config/mise/config.toml

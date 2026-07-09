@@ -92,7 +92,7 @@ graph TB
 | **版本管理统一** | Go/Node/Python/Java/Maven/fnox 由 mise 管理，Rust 由 rustup | `.config/mise/config.toml` |
 | **密钥管理** | fnox 按需加载密钥，`audit --secrets` 防泄漏 | 系统级 `~/.config/fnox/config.toml` |
 | **安全推送** | pre-push hook 自动审计密钥后阻止危险推送 | `hooks/pre-push` |
-| **终端增强** | tmux + starship + fzf + bat 一体化体验 | `.tmux.conf`, `.config/starship.toml` |
+| **终端增强** | Ghostty 1.3 (GPU) + tmux + starship + fzf + bat | `.tmux.conf`, `.config/ghostty/config`, `.config/starship.toml` |
 | **容器环境** | Docker 29 + Docker Compose 5（Colima + Lima VM） | `.colima/default/colima.yaml` |
 | **AI 集成** | Claude Code / Codex CLI 感知开发环境 | `.claude/CLAUDE.md`, `.codex/AGENTS.md` |
 | **一键同步** | `dotfiles-sync` 完成审计、提交、推送 | `bin/dotfiles-sync` |
@@ -101,7 +101,7 @@ graph TB
 
 ### 3.2 托管配置清单
 
-共 **17 项**配置通过 `manifest` 管理（截止 v1.0.0）：
+共 **18 项**配置通过 `manifest` 管理（截止 v1.0.0）：
 
 **Shell 层 (5 项)**
 | 部署路径 | 说明 |
@@ -118,10 +118,11 @@ graph TB
 | `~/.gitconfig` | 通用 git 配置（不含身份） |
 | `~/.config/git/ignore` | 全局 git 忽略规则 |
 
-**终端层 (1 项)**
+**终端层 (2 项)**
 | 部署路径 | 说明 |
 |---------|------|
 | `~/.tmux.conf` | tmux 配置（Ctrl-b 前缀 + 系统剪贴板） |
+| `~/.config/ghostty/config` | Ghostty 终端模拟器配置 |
 
 **CLI 工具层 (3 项)**
 | 部署路径 | 说明 |
@@ -164,7 +165,7 @@ git clone https://github.com/obra/homedir-manager ~/git/homedir-manager
 ~/git/homedir-manager/bootstrap
 
 # 3. 安装工具并部署
-brew install git gh tmux ripgrep fd fzf jq bat starship mise
+brew install git gh tmux ripgrep fd fzf jq bat starship mise ghostty
 # rtk（可选，LLM token 优化）
 curl -fsSL https://raw.githubusercontent.com/rtk-ai/rtk/master/install.sh | sh
 homedir-manager install
@@ -331,9 +332,9 @@ flowchart LR
 
 ```
 bat         colima          docker          fd          gh
-hammerspoon htop            icdiff          jq          lima
-mas         mise            ripgrep         starship    tmux
-tree        wget            docker-compose
+ghostty     hammerspoon     htop            icdiff      jq
+lima        mas             mise            ripgrep     starship
+tmux        tree            wget            docker-compose
 ```
 
 ---

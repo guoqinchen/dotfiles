@@ -18,7 +18,7 @@
 ## 开发环境
 
 - 操作系统: macOS (arm64)
-- Shell: zsh (ZDOTDIR=~/.config/zsh)
+- Shell: zsh (ZDOTDIR=~/.config/zsh), Ghostty 1.3.1
 - 编辑器: Trae IDE
 - 工具管理: mise, fnox, Homebrew
 - Node: mise 管理

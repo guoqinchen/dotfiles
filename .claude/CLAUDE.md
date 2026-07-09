@@ -17,7 +17,7 @@
 
 ## 开发环境
 
-- Shell: zsh (ZDOTDIR=~/.config/zsh)
+- Shell: zsh (ZDOTDIR=~/.config/zsh), Ghostty 1.3.1 (终端模拟器)
 - 包管理: Homebrew (Apple Silicon arm64)
 - Node 管理: mise（项目级 `.mise.toml` / 全局 `mise config`）
 - 工具版本: mise 管理（Go/Node/Python/fnox/Java/Maven）；Rust 由 rustup 管理
@@ -39,3 +39,5 @@
 - 定期运行 `homedir-manager audit` 检查部署完整性
 - 向公开仓库推送前运行 `homedir-manager audit --secrets`
 - 新机器部署：clone → homedir-manager install → 补密钥
+
+@RTK.md

@@ -1,5 +1,5 @@
 [tools]
-"ubi:jdx/fnox" = "latest"
+"github:jdx/fnox" = "latest"
 go = "latest"
 rust = "latest"
 node = "lts"

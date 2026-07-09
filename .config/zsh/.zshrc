@@ -28,15 +28,7 @@ if [ -x /opt/homebrew/bin/brew ]; then
   eval "$(/opt/homebrew/bin/brew shellenv)"
 fi
 
-# Node 版本管理
-# 注意: fnm + mise 同时存在时，mise 后激活，其 Node 版本覆盖 fnm。
-# 建议只用一个。当前以 mise 为准（fnm 兼容保留）。
-fnm_env_path="/opt/homebrew/opt/fnm/bin/fnm"
-if [ -x "$fnm_env_path" ]; then
-  eval "$("$fnm_env_path" env --shell zsh --corepack-enabled 2>/dev/null)"
-fi
-
-# mise (工具版本管理)
+# mise (工具版本管理 — 管理 Node/Go/Rust/Python/fnox 等)
 if command -v mise &>/dev/null; then
   eval "$(mise activate zsh)"
 fi

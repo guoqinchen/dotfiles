@@ -165,6 +165,8 @@ git clone https://github.com/obra/homedir-manager ~/git/homedir-manager
 
 # 3. 安装工具并部署
 brew install git gh tmux ripgrep fd fzf jq bat starship mise
+# rtk（可选，LLM token 优化）
+curl -fsSL https://raw.githubusercontent.com/rtk-ai/rtk/master/install.sh | sh
 homedir-manager install
 
 # 4. 安装语言运行时
@@ -328,10 +330,10 @@ flowchart LR
 ### 6.3 Homebrew 已安装工具
 
 ```
-bat         diff-so-fancy   fd      fnm(已卸载)   fzf
-gh          hammerspoon     htop    icdiff        jq
-mas         mise            ripgrep starship      tmux
-tree        wget
+bat         colima          docker          fd          gh
+hammerspoon htop            icdiff          jq          lima
+mas         mise            ripgrep         starship    tmux
+tree        wget            docker-compose
 ```
 
 ---

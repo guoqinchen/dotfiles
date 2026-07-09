@@ -24,6 +24,7 @@
 - Java: Adoptium JDK 21 LTS（mise java 插件）
 - 构建工具: Maven 3.9.x（mise maven 插件，自动识别 mise java）
 - 容器: Docker 29 + Docker Compose 5（Colima 0.10 + Lima VM on Apple Silicon）
+- Token 优化: rtk v0.43.0（~/bin/rtk）— 用于过滤冗长的命令输出以节省 LLM token
 - 密钥管理: fnox
 - macOS
 

@@ -27,3 +27,4 @@
 - Java: mise 管理（Adoptium JDK 21 LTS）
 - Maven: mise 管理（最新稳定版）
 - Docker: Colima + Docker CLI 29 + Docker Compose 5（brew 安装）
+- rtk: 0.43.0（~/bin/rtk）— 命令输出 token 优化

@@ -89,7 +89,7 @@ graph TB
 |------|------|---------|
 | **ZDOTDIR 模式** | zsh 配置从 `~/.config/zsh/` 加载，防止 IDE 覆盖 | `.zshenv`, `.config/zsh/.zshrc` |
 | **Git 配置分离** | 用户身份存于 `~/.gitconfig-local`，不入仓 | `.gitconfig`, `~/.gitconfig-local` |
-| **版本管理统一** | Go/Node/Python/fnox 由 mise 管理，Rust 由 rustup | `.config/mise/config.toml` |
+| **版本管理统一** | Go/Node/Python/Java/Maven/fnox 由 mise 管理，Rust 由 rustup | `.config/mise/config.toml` |
 | **密钥管理** | fnox 按需加载密钥，`audit --secrets` 防泄漏 | 系统级 `~/.config/fnox/config.toml` |
 | **安全推送** | pre-push hook 自动审计密钥后阻止危险推送 | `hooks/pre-push` |
 | **终端增强** | tmux + starship + fzf + bat 一体化体验 | `.tmux.conf`, `.config/starship.toml` |
@@ -318,6 +318,8 @@ flowchart LR
 | Node | `~/.local/share/mise/installs/node/lts/bin/node` | 同上 |
 | Go | `~/.local/share/mise/installs/go/1.26.4/bin/go` | `~/go/` |
 | Python | `~/.local/share/mise/installs/python/latest/bin/python3` | 同 Node |
+| Java | `~/.local/share/mise/installs/java/21.0.2/bin/java` | `~/.local/share/mise/installs/java/` |
+| Maven | `~/.local/share/mise/installs/maven/latest/apache-maven-3.9.16/bin/mvn` | 同上 |
 | fnox | `~/.local/share/mise/installs/fnox/latest/fnox` | `~/.config/fnox/` |
 | Rust | `~/.cargo/bin/rustc` | `~/.cargo/`, `~/.rustup/` |
 
@@ -499,6 +501,8 @@ flowchart LR
         D --> F[Node 24.18.0 LTS]
         D --> G[Python 3.14.6]
         D --> H[fnox 1.29.0]
+        D --> J[Java JDK 21.0.2]
+        D --> K[Maven 3.9.16]
     end
 
     subgraph 终端["终端工具"]

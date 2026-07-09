@@ -24,3 +24,5 @@
 - Node: mise 管理
 - Go: mise 管理
 - Rust: rustup 管理
+- Java: mise 管理（Adoptium JDK 21 LTS）
+- Maven: mise 管理（最新稳定版）

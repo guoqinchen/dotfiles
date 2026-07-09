@@ -54,6 +54,26 @@ else
 fi
 
 echo ""
+echo "--- 语言运行时 ---"
+if command -v java &>/dev/null; then
+  jver=$(java -version 2>&1 | head -1 | sed 's/.*"\(.*\)".*/\1/')
+  echo "  ✅ PASS: JDK $jver"
+  PASS=$((PASS + 1))
+else
+  echo "  ⚠️  SKIP: JDK 未安装（可选）"
+  PASS=$((PASS + 1))
+fi
+
+if command -v mvn &>/dev/null; then
+  mvnver=$(mvn --version 2>&1 | head -1 | sed 's/.*Apache Maven //' | awk '{print $1}')
+  echo "  ✅ PASS: Maven $mvnver"
+  PASS=$((PASS + 1))
+else
+  echo "  ⚠️  SKIP: Maven 未安装（可选）"
+  PASS=$((PASS + 1))
+fi
+
+echo ""
 echo "========================================="
 echo " 结果: $PASS 通过 / $FAIL 失败"
 echo "========================================="
